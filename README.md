@@ -1,13 +1,13 @@
 
-# React useReduce Hook
+# React useReducer Hook
 
-`useReduce` is a built-in React hook that provides a way to manage state in functional components. It is an alternative to the more commonly used `useState` hook and allows for more complex state management.
+`useReducer` is a built-in React hook that provides a way to manage state in functional components. It is an alternative to the more commonly used `useState` hook and allows for more complex state management.
 
 
 
-## What is useReduce?
+## What is useReducer?
 
-`useReduce` is a hook that is used to manage state in functional components. It takes two arguments: a reducer function and an initial state value.
+`useReducer` is a hook that is used to manage state in functional components. It takes two arguments: a reducer function and an initial state value.
 
 
 
@@ -19,15 +19,15 @@ The initial state value is the starting point for the state. It can be any value
 
 
 
-## When should you use useReduce?
+## When should you use useReducer?
 
-`useReduce` is useful when you need to manage complex state that involves multiple variables or when you need to perform complex state updates based on user interactions.
+`useReducer` is useful when you need to manage complex state that involves multiple variables or when you need to perform complex state updates based on user interactions.
 
 It is also useful when you have multiple components that need to share state. By lifting the state up to a common ancestor component and passing down the state and dispatch function as props, you can ensure that all components are working with the same state.
 
 ## Example
 
-Here is an example of how to use `useReduce`:
+Here is an example of how to use `useReducer`:
 
 ```
 import React, { useReducer } from 'react';
@@ -65,4 +65,4 @@ We then use the `useReducer` hook to create a state and dispatch function based 
 
 ## Conclusion
 
-`useReduce` is a powerful tool for managing complex state in functional components. By providing a reducer function and an initial state value, you can create a state and dispatch function that can handle complex state updates based on actions. If you find yourself struggling to manage state with `useState`, consider using `useReduce` instead.
+`useReducer` is a powerful tool for managing complex state in functional components. By providing a reducer function and an initial state value, you can create a state and dispatch function that can handle complex state updates based on actions. If you find yourself struggling to manage state with `useState`, consider using `useReducer` instead.
