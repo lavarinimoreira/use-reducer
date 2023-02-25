@@ -1,6 +1,8 @@
+import { stat } from "fs";
 import React from "react";
+import Slider from "./Slider";
 
-const ReducerComponent = () => {
+const ReducerComponent: React.FC = () => {
   /*----------------------------------------------------------------------------------+
    *useReducer returns an array with the first element being the state and the second #
    * element being a dispatch function which when called, will invoke the reducer.    #
@@ -8,19 +10,36 @@ const ReducerComponent = () => {
    * const [state, dispatch] = useReducer(reducer, initialState);                     #
    *                                                                                  #
    * ---------------------------------------------------------------------------------*/
-  const reducer = (state: number, action: string) => {
-    if (action === "increment") {
-      return state + 1;
-    } else if (action === "decrement") {
-      return state - 1;
-    } else if (action === "reset") {
-      return 0;
+  const reducer = (
+    state: { count: number; step: number },
+    action: { type: string; step: number }
+  ) => {
+    if (action.type === "increment") {
+      return {
+        count: state.count + state.step,
+        step: state.step,
+      };
+    } else if (action.type === "decrement") {
+      return {
+        count: state.count - state.step,
+        step: state.step,
+      };
+    } else if (action.type === "reset") {
+      return {
+        count: 0,
+        step: state.step,
+      };
+    } else if (action.type === "updateStep") {
+      return {
+        count: state.count,
+        step: action.step,
+      };
     } else {
       throw new Error("This action type ins't supported");
     }
   };
 
-  const [count, dispatch] = React.useReducer(reducer, 0);
+  const [state, dispatch] = React.useReducer(reducer, { count: 0, step: 1 });
 
   /*----------------------------------------------------------------------------------+
    *Whenever the + button is clicked, dispatch will be invoked.                       #
@@ -33,10 +52,27 @@ const ReducerComponent = () => {
    * ---------------------------------------------------------------------------------*/
   return (
     <React.Fragment>
-      <h1>{count}</h1>
-      <button onClick={() => dispatch("increment")}>+</button>
-      <button onClick={() => dispatch("decrement")}>-</button>
-      <button onClick={() => dispatch("reset")}>Reset</button>
+      <Slider
+        min={1}
+        max={10}
+        onChange={(value: number) =>
+          dispatch({
+            type: "updateStep",
+            step: value,
+          })
+        }
+      />
+      <hr />
+      <h1>{state.count}</h1>
+      <button onClick={() => dispatch({ type: "increment", step: state.step })}>
+        +
+      </button>
+      <button onClick={() => dispatch({ type: "decrement", step: state.step })}>
+        -
+      </button>
+      <button onClick={() => dispatch({ type: "reset", step: state.step })}>
+        Reset
+      </button>
     </React.Fragment>
   );
 };
